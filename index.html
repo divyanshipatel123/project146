@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MY second WEB VR project</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    
+    <style>
+        body{
+            margin:0;
+            background-color: #5e090ad8
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            background-color: #f90acd
+        }
+    </style>
+    </head>
+    <body>
+        <script src="three.min.js"></script>
+        <script src="GLTFLoader.js"></script>
+        <script src="OrbitControls.js"></script>
+        <script>
+            let scene , camera , renderer , control
+            function init(){
+                    scene = new THREE.Scene();
+                    scene.background = new THREE.Color(0x5e5f5e);
+
+                    camera = new THREE.PerspectiveCamera(40 , window.innerWidth/window.innerHeight , 1 , 5000);
+                    
+                    
+                    
+                    var blue = new THREE.Color(0xf90acd)
+                    light = new THREE.PointLight(0xc4c4c4,9);
+                    light.position.set(-50,50,15);
+                    scene.add(light);
+                    light2 = new THREE.PointLight(0xc4c4c4,5);
+                    light2.position.set(-20,-50,15);
+                    scene.add(light2);
+                    light3 = new THREE.PointLight(blue,15);
+                    light3.position.set(60,50,15);
+                    scene.add(light3);
+                    
+
+                    camera.position.z = 10;
+                    camera.position.y = 2;
+                    
+
+                    renderer = new THREE.WebGLRenderer({antialias: true});
+                    renderer.setSize(window.innerWidth ,window.innerHeight);
+                    document.body.appendChild(renderer.domElement);
+
+                    var loader = new THREE.GLTFLoader();
+                    loader.load("scene.gltf",function(gltf){
+                            scene.add(gltf.scene)
+                            renderer.render(scene , camera)
+                            
+                    });
+                }
+                
+            init()
+        </script>
+        
+              
+    </body>
+</html>
